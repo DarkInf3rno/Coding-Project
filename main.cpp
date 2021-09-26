@@ -3,6 +3,9 @@
 #include <iostream> //cin and cout
 #include "time.hpp"
 #include "date.hpp"
+#include <string>
+
+
 using namespace std;
 
 int arr[4];

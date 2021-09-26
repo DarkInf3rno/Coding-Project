@@ -1,4 +1,6 @@
-//date.cpp to implement your class
+//date.cpp to implement your class 
+
+
 #include "date.hpp"
 
       void input();
@@ -14,12 +16,18 @@
       int get_day();
       // Returns the day of the month 
 
-      void set_time(bool appointed_time[48])
+      void set_time(bool appointed_time[48]); 
       // Pick an appointed time
       // Reset to the arguments
 
-           
+      Date::Date(int amonth, int aday, int ayear) {
+        this -> month = amonth;
+        this -> day = aday;
+        this -> year = ayear; 
+      }
 
+           
+/*
 Date::input() {
 
   cout << "Enter the month: ";
@@ -67,4 +75,4 @@ Date::get_month(){
 
 Date::get_day(){
   return day;
-}
+} */
