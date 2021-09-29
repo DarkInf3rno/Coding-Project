@@ -166,13 +166,19 @@ using namespace std;
       
       }
       }
-      int Date::printFreeTimeSlots(int month, int day)
+  /*   int Date::printFreeTimeSlots(int month, int day)
       {
+        int hour;
           bool appointed[48] = {false};
           
           for (int i =0; i < 48; i++) {
-             appointed[i] = false;
-             if (appointed[i]==false){
+            hour = i/2;
+            if(i % 2 ==0){
+              cout << hour <<  
+            }
+            else
+             
+             
                cout << 0 + 30 ; 
                break;
              }
@@ -182,7 +188,7 @@ using namespace std;
       }
         
          
-
+*/
       
           
       

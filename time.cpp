@@ -83,9 +83,9 @@
           }
 
           void TimeRange::output(){
-            isValid( beginHour,  beginMinute,  endHour,  endMinute) {
+            isValid( beginHour,  beginMinute,  endHour,  endMinute);
 
-              cout << "Begin time" << beginHour<< ": "<<beginMinute << endl << endHour,  endMinute
+              cout << "Begin time: " << beginHour<< "hrs " << beginMinute << "mins" << endl << "End time: " << endHour <<"hrs "<< endMinute << "mins";
 
             }
             
@@ -98,7 +98,7 @@
             }
 
             */
-          }
+          
 
           
           int TimeRange::getBeginMin() {

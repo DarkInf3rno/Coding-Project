@@ -55,6 +55,9 @@ int main() {
   cout << endl << "Pick a time for your appointment "<< endl;
   tr.input();
   tr.output();
+
+  tr.setTimeRange(15, 30, 16, 0);
+  tr.output();
     
    return 0;
 }
