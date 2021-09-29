@@ -22,5 +22,8 @@ date.o: date.cpp
 	g++ -g -c date.cpp
 
 #remove built files
+
+testing.o: testing.cpp
+	g++ -g -c testing.cpp
 clean:
 	rm -rf main main.o time.o date.o *~

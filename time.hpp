@@ -17,7 +17,7 @@
 
 
 */
-
+#include <iostream>
 using namespace std; 
 
 class TimeRange {
@@ -29,19 +29,26 @@ class TimeRange {
         //Functions 
           //Constructors
             TimeRange(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute);
+            TimeRange();
+          //Function functions
 
-          //FUnction functions
-
-            void getTimeRange(); //Gets the desired time range from the user
+            void getTimeRange(); //Gets the time range from the class
 
             //Functions to help getTimeRange. Also provide more precision
-                int getBeginMin(int usrBeginMin); 
-                int getBeginHour(int usrBeginHour); 
+                void input();
+                void output();
+                int getBeginMin(); 
+                int getBeginHour(); 
 
-                int getEndMin(int usrEndMin); 
-                int getEndHour(int usrEndHour);
+                int getEndMin(); 
+                int getEndHour();
+
+                bool isValid(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute);
+            //;c
 
             void setTimeRange(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute); //Sets the desired time range
+
+             
 
      private: 
         int beginHour;
@@ -52,13 +59,19 @@ class TimeRange {
 
 };
 
-          void TimeRange::setTimeRange(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute) {
+/*          void TimeRange::setTimeRange(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute) {
+              
+             // int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute
 
+              if (isValid(inBeginHour, inBeginMinute, inEndHour, inEndMinute)) {
+                
               beginHour = inBeginHour; 
               beginMinute = inBeginMinute;
 
               endHour = inEndHour; 
-              endMinute = inEndMinute; 
+              endMinute = inEndMinute;
+
+              }  
           }
 
           TimeRange::TimeRange(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute) {
@@ -73,47 +86,52 @@ class TimeRange {
           }
 
           void TimeRange::getTimeRange() {
-            int a;
-            std::cin << a;
-
-            int b;
-            std::cin << b;
-
-            int c;
-            std::cin << c;
-
-            int d;
-            std::cin << d;
+            
+              getBeginMin();
+              getBeginHour();
+              getEndHour();
+              getEndMin(); 
               
           }
 
-          int TimeRange::getBeginMin(int usrBeginMin) {
+          int TimeRange::getBeginMin() {
       
-              int holder1 = usrBeginMin; 
-              return holder1; 
+              return this -> beginMinute; 
 
           }
           
-          int TimeRange::getBeginHour(int usrBeginHour) {
+          int TimeRange::getBeginHour() {
 
-               int holder2 = usrBeginHour; 
-               return holder2;
+              return this -> beginHour; 
+           
           }
 
-          int TimeRange::getEndMin(int usrEndMin) {
+          int TimeRange::getEndMin() {
 
-             int holder3 = usrEndMin; 
-             return holder3;
+              return this -> endMinute; 
+
           }
                 
-          int TimeRange::getEndHour(int usrEndHour) {
+          int TimeRange::getEndHour() {
 
-            int holder4 = usrEndHour; 
-            return holder4;
+              return this -> endHour; 
 
           }
 
-          
+          bool TimeRange::isValid(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute) {
+
+            //Each variable must be less than or equal to 60 and be greater than or equal to 0. Must be multiples of 30, ie 0.6*50. 
+            //Conditions. Modulus of (inBeginTime/0.6)%50 must be 0. 
+
+              if ((inBeginMinute == 0) || (inBeginMinute==30) && (inEndMinute ==0) || (inEndMinute==30)) {
+              
+              return true; 
+                
+              } else {return false;}
+
+          }
+
+  */        
 
 
 
