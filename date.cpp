@@ -22,17 +22,40 @@ using namespace std;
         appointed[48] = false;
       }
 
-      void Date::input(){
+      void Date::input() {
         cout << "Enter month as a number: ";
         cin >> this -> month;
+
+        if (month != 9 && month != 10 && month != 11 && month != 12) {
+
+          cout << "Invalid month. Please try again" << endl<< " Program exiting" << endl ; 
+          exit(1);
+          
+
+        } 
+
+        else {
+          ;
+        }
+
+        // Takes input for month then using printDays(); we can print all the days in that month
         this -> printDays();
         cout << "Enter day of the month: ";
         cin >> this -> day;
+        
       }
-      void Date::output(){
+      void Date::output(std::ostream& outs){
         isValid();
         isHoliday();
         isWeekend();
+         cout << "You have chosen a valid date for your appointment, here are all the times. " << endl;
+        //In output, it checks through all 3 functions to see if it is a legal date
+        cout << "The date you have selected is " << month << "/" << day << "/2021" << endl;
+        cout << "Here are open time slots for " << month << "/" << day << "/2021" << endl; 
+        printFreeTimeSlots();
+        cout << endl ;
+        
+        // After confirming they are valid, we print out all the available time slots in that day.
         
       }
 
@@ -49,14 +72,45 @@ using namespace std;
         return this -> month; 
       }
 
-      void Date::isValid(){
-        if ((month < 9) || (month > 12) || (day < 1 ) || (day > 31 )) {
-        cout << "You can not book an appointment on this date. Aborting program. " << endl;
-        exit(1);
+      void Date::setAppointment(bool *&appointed){
+            appointed[48]=*&appointed;
+      }
+
+      void Date::isValid() {
+
+        if ((month < 9) || (month > 12) || (day < 1 ) || (day > 31 ) || (month == 9 && day > 30) || (month == 9 && day < 8) || (month == 12 && day > 9) || (month == 11 && day > 30)) {
+
+          cout << "You can not book an appointment on this date. Aborting program. " << endl;
+          exit(1); 
         
       }
+    // isValid checks if the they entered a valid day or month, so if they enter anything else it wouldn't work 
       }
-      void Date::isWeekend() {
+
+
+      void Date::isWeekend() { 
+          if (month==9 && (day == 11 || day == 12 || day == 18 || day == 19 || day ==     25 || day == 26 )){
+            cout << "You have chosen a weekend, no appointments can be booked. Aborting" << endl;
+            exit(1);
+            }
+
+          else if (month==10 && (day ==2 || day == 3 || day == 9 || day ==10 || day == 16|| day ==17 || day == 23 || day == 24 || day == 30 || day == 31 )){
+             cout << "You have chosen a weekend, no appointments can be booked. Aborting" << endl;
+            exit(1);
+          }
+          else if (month == 11 && (day == 6 || day == 7 || day == 13 || day == 14 || day == 20 || day == 21 || day == 27 || day ==28)){
+             cout << "You have chosen a weekend, no appointments can be booked. Aborting" << endl;
+            exit(1);
+          }
+
+          else if (month == 12 && (day == 4 || day ==5)){
+              cout << "You have chosen a weekend, no appointments can be booked. Aborting" << endl;
+            exit(1);
+          }
+          }
+
+
+        /*
     static int MNAY[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
     // Magic number array for calculations for year
     const int year = 2021;
@@ -64,36 +118,17 @@ using namespace std;
 
 
     int x =  (year + year / 4 - year / 100 + year / 400 + MNAY[month - 1] + day) % 7;
+    // Based off the Gregorian calender,
     // The calculation done to find what day of the week it is. Returns 0 = sunday , 1 = mond....
 
         if (x == 0 || x == 6) {
           cout << "You have chosen a weekend, no appointments can be booked. Aborting" << endl;
           exit(1);
-     } else {
-        cout << "You have chosen a valid date for your appointment";
-     }
-
-   
-
-}
-      /*int Date::isWeekend(int month, int day) {
-        static int MNAY[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
-        // Magic number array for calculations for year
-        const int year = 2021;
-        // Year is constant since the schedule is only during 2021
-      
-         int x = (year+year / 4 - year / 100 + year / 400 + MNAY[month - 1] + day) % 7;
-          // The calculation done to find what day of the week it is. Returns 0 = sunday , 1 = mond....
-
-          if(x==0 || x == 6){
-            cout<<"You have chosen a weekend, no appointments can be booked. Aborting"<< endl;
-          return 1;
-                }
-            else {
-              cout << "Valid day, pick a time slot: " ;
-                   }
-        }
+     } 
 */
+
+     
+
     
       
 
@@ -138,7 +173,7 @@ using namespace std;
       
 
       void Date::printDays(){
-        
+      // Uses a switch statement, taking in month and then printing out all the info in that month.
           switch(month){
           case 9: {
           Date September[22];
@@ -146,7 +181,7 @@ using namespace std;
           break;
          }
           case 10: {
-          Date October[31];
+          Date October[30];
           DateInitializer(October, 1, 31, 10);
           break;
          }
@@ -158,6 +193,7 @@ using namespace std;
          case 12: {
            Date December[9];
            DateInitializer(December, 1, 9, 12);
+           cout << December[2].getDay() << endl; 
            break;
          }
          default: {
@@ -166,33 +202,55 @@ using namespace std;
       
       }
       }
-  /*   int Date::printFreeTimeSlots(int month, int day)
+     void Date::printFreeTimeSlots()
       {
+        // Using a for loop, we can print out all the time intervals
+        // We use it by checking which values in the array are false, and print if it is false
         int hour;
           bool appointed[48] = {false};
           
-          for (int i =0; i < 48; i++) {
+          for (int i = 0; i < 48; i++) {
+            if(appointed[i]==false){
             hour = i/2;
-            if(i % 2 ==0){
-              cout << hour <<  
-            }
-            else
-             
-             
-               cout << 0 + 30 ; 
-               break;
+              if(i % 2 ==0){
+            
+               cout << endl << hour << ":00-" << hour <<":30" <<endl;
+                }
+                // Since there is 48 time intervals in a day, we can divide hour by i to  find the all 48 different time intervals.
+                // Then using i % 2 we can correctly assign time intervals per block in the day/
+                    
+              else
+
+                cout << hour << ":30-" << hour +1 <<":00" << endl;
+              // Use hour plus 1 here because since the else is going to be all the odd numbers, we need to add so it rounds down.
+               }
              }
-             
+      }
+
+      void Date::printAppointedTimeSlots(){
+        // Using a for loop, we can print out all the time intervals
+        // We use it by checking which values in the array are true, and print if it is true
+        
+        //bool appointed[48] = {false};
+
+        int hour;
+        for (int i = 0; i < 48; i++){
+          if (appointed[i]==true){
+            hour = i/2;
+              if(i % 2 == 0){
+                 cout << hour << ":00-" << hour <<":30" <<endl;
+                   // Since there is 48 time intervals in a day, we can divide hour by i to  find the all 48 different time intervals.
+                // Then using i % 2 we can correctly assign time intervals per block in the day/
+                    
+              }
+              else if (!(i % 2 == 0)){
+                cout << hour << ":30-" << hour +1 <<":00" << endl;
+                 // Use hour plus 1 here because since the else is going to be all the odd numbers, we need to add so it rounds down.
+              }
+
+
           }
+        }
 
       }
-        
-         
-*/
-      
-          
-      
-      
-
-
-           
+            

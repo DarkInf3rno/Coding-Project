@@ -3,7 +3,7 @@
 #include <iostream>
     
    
-          void TimeRange::setTimeRange(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute) {
+         void TimeRange::setTimeRange(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute) {
               
              // int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute
 
@@ -17,6 +17,7 @@
 
               }  
           }
+          
 //Constructor Functions
           TimeRange::TimeRange(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute) {
 
@@ -25,7 +26,7 @@
               endHour = inEndHour; 
               endMinute = inEndMinute; 
 
-              cout << "testing phrase";
+          
 
           }
 
@@ -37,7 +38,6 @@
               endHour = 0; 
               endMinute = 0; 
 
-              cout << "testing phrase";
           }
 
 
@@ -51,41 +51,73 @@
               
           }
 
-          void TimeRange::input() {
+          void TimeRange::input(int inBeginHour, int inBeginMinute, int inEndHour, int inEndMinute) {
 
-              cout << "Enter the hour of your beginning time: " << endl; 
-              cin >> beginHour;
+              cout << "Enter the hour of your beginning time: "; 
+              cin >> inBeginHour;
 
-              cout << "Enter the minutes past the hour of your starting time time interval. For example if you want your start time to be 13:30, you would have selected 13 as the hour of your beginning time and would proceed to type 30 in the upcoming field: ";
-              cin >> beginMinute;
+              cout << endl << "Enter the minutes past the hour of your starting time time interval. For example if you want your start time to be 13:30, you would have selected 13 as the hour of your beginning time and would proceed to type 30 in the upcoming field: ";
+              cin >> inBeginMinute;
 
-              cout << "Enter the hour of your ending time. Make sure the end time you have in mind is exactly 30 minutes from the start time: " << endl; 
-              cin >> endHour;
+              cout << endl << "Enter the hour of your ending time. Make sure the end time you have in mind is exactly 30 minutes from the start time: " << endl; 
+              cin >> inEndHour;
 
-              cout << "Enter the minutes field of your endtime: ";
-              cin >> endMinute;
+              cout << endl << "Enter the minutes field of your endtime: ";
+              cin >> inEndMinute;
 
-              if (((endHour*60)+endMinute)-((beginHour*60)+beginMinute) == 30)
-            {
+              //if (((endHour*60)+endMinute)-((beginHour*60)+beginMinute) == 30 || (endHour == 24 && endMinute == 30)){
+                if (isValid(beginHour, beginMinute, endHour, endMinute)) {
 
+                  
                   cout << "Great you chose a valid time" << endl << endl;
 
-              } else {
+              }
+              else{
 
-                cout << "You selected an invalid time slot. Try again. The time slot should be 30 minutes apart." << endl;
+                cout << "The chosen timeslot is invalid.  Please try again. The time slot should be 30 minutes apart. Refer to the list of open time slots." << endl;
 
-                input();
+                 input();
 
               }
+             
+          }
 
-              
 
+          void TimeRange::input() {
+
+              cout << "Enter the hour of your beginning time: "; 
+              cin >> beginHour;
+
+              cout << endl << "Enter the minutes past the hour of your starting time time interval. For example if you want your start time to be 13:30, you would have selected 13 as the hour of your beginning time and would proceed to type 30 in the upcoming field: ";
+              cin >> beginMinute;
+
+              cout << endl << "Enter the hour of your ending time. Make sure the end time you have in mind is exactly 30 minutes from the start time: " << endl; 
+              cin >> endHour;
+
+              cout << endl << "Enter the minutes field of your endtime: ";
+              cin >> endMinute;
+
+              //if (((endHour*60)+endMinute)-((beginHour*60)+beginMinute) == 30 || (endHour == 24 && endMinute == 30)){
+                if (isValid(beginHour, beginMinute, endHour, endMinute)) {
+
+                  
+                  cout << "Great you chose a valid time" << endl << endl;
+
+              }
+              else{
+
+                cout << "The chosen timeslot is invalid.  Please try again. The time slot should be 30 minutes apart. Refer to the list of open time slots." << endl;
+
+                 input();
+
+              }
+             
           }
 
           void TimeRange::output(){
-            isValid( beginHour,  beginMinute,  endHour,  endMinute);
+            
 
-              cout << "Begin time: " << beginHour<< "hrs " << beginMinute << "mins" << endl << "End time: " << endHour <<"hrs "<< endMinute << "mins";
+              cout << "Begin time: " << beginHour<< "hrs " << beginMinute << "mins" << endl << "End time: " << endHour <<"hrs "<< endMinute << "mins" << endl;
 
             }
             
@@ -130,25 +162,28 @@
             //Each variable must be less than or equal to 60 and be greater than or equal to 0. Must be multiples of 30, ie 0.6*50. 
             //Conditions. Modulus of (inBeginTime/0.6)%50 must be 0. 
 
-              if (((endHour*60)+endMinute)-((beginHour*60)+beginMinute) == 30)
+              if (((endHour*60)+endMinute)-((beginHour*60)+beginMinute) == 30 && beginMinute)
             {
 
-                  cout << "Great you chose a valid time" << endl << endl;
+                  //cout << "Great you chose a valid time" << endl << endl;
+                  ;
 
               } else {
 
                 cout << "You selected an invalid time slot. Try again. The time slot should be 30 minutes apart. " << endl;
-
                 input();
 
               }
-          }
-
-            /*  if ((inBeginMinute == 0) || (inBeginMinute==30) && (inEndMinute ==0) || (inEndMinute==30)) {
+          
+              if (((inBeginMinute-inEndMinute == 30) || (inEndMinute - inBeginMinute == 30)) && ((inBeginMinute == 30) || (inEndMinute == 30))) {
               
-              return true; 
+                return true; 
                 
-              } else {return false;}
+              } 
+              else {
+                
+                return false;
+                }
+  
 
           }
-*/

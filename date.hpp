@@ -10,11 +10,13 @@ class Date {
         Date(bool appointed[48]);
 //Member functions
         void setDate(int amonth, int aday);
+        void setAppointment(bool *&appointed);
         void input();
-        void output();
+        void output(std::ostream& outs);
         int getDay();
         int getMonth();
-        
+        void printAppointedTimeSlots();
+        void printFreeTimeSlots();
         friend bool equal (const Date date1, const Date date2); 
         void DateInitializer(Date sampleMonth[], int startDay, int endDay, int monthNumber);
 //Private Section.
@@ -33,7 +35,8 @@ class Date {
           void isValid();
           void isWeekend();
           void isHoliday() ;
-        int printFreeTimeSlots(int month, int day);
+          
+         
 };  
 
 //Date constructor takes in the month and a day to create a new structure with a user input day and month.
